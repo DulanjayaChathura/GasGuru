@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+	<Properties>
+		<Property name="log-path">/var/log/GasGuruServiceLog</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console-Appender" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%X{id}] [%X{apiName}] [%X{user}] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="App-File-Appender" fileName="${log-path}/app_log.log"
+			filePattern="${log-path}/app_log.log-%d{yyyy-MM-dd}-%i.log">
+			<ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="ACCEPT"/>
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%X{id}] [%X{apiName}] [%X{user}] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+		<!-- Rolling File Appender -->
+		<RollingFile name="Error-File-Appender" fileName="${log-path}/error_log.log"
+			filePattern="${log-path}/error_log.log-%d{yyyy-MM-dd}-%i.log">
+			<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%X{id}] [%X{apiName}] [%X{user}] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+		<File name="SpringBoot-File-Appender" fileName="${log-path}/springboot_log.log">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+		</File>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.springframework" level="info" additivity="false">
+			<AppenderRef ref="SpringBoot-File-Appender" />
+			<AppenderRef ref="Console-Appender" />
+		</Logger>
+		<Logger name="com.GasGuru.GasGuru" level="info" additivity="false">
+			<AppenderRef ref="App-File-Appender" />
+			<AppenderRef ref="Error-File-Appender" />
+		</Logger>
+		<logger name="org.springframework.boot.context.web.ErrorPageFilter">
+			<level value="OFF" />
+		</logger>
+		<Root>
+			<AppenderRef ref="Console-Appender" />
+		</Root>
+	</Loggers>
+</Configuration>
