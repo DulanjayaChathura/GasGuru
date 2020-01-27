@@ -1,5 +1,7 @@
 package com.GasGuru.GasGuru.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +23,7 @@ public class Person{
 	@Column(name="fullname")
 	String fullName;
 	@Column(name="dateOfBirth")
-	String dateOfBirth;
+	Date dateOfBirth;
 	@Column(name="nic")
 	String nic;
 	@Column(name="address")

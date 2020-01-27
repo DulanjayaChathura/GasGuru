@@ -56,7 +56,7 @@ public class GasGuruController {
 		ThreadContext.put("id", UUID.randomUUID().toString());
 		ThreadContext.put(API_NAME, "/gasGuru/register");
 		logger.info("register {}" , jacksonConfig.convertToJson(model));
-
+		return personServices.register(model);
 		
 	}
 	
