@@ -12,4 +12,5 @@ public class CommonResponse {
 
 	String status;
 
+
 }

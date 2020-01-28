@@ -14,6 +14,6 @@ import com.GasGuru.GasGuru.entity.FualStationDetails;
 @Repository
 public interface FualStationRepo extends JpaRepository<FualStationDetails, Integer>{
 	
-	@Query("SELECT station FROM FualStationDetails station WHERE csb.stationName like ':stationName%' ")
+	@Query("SELECT station FROM FualStationDetails station WHERE station.stationName like :stationName% ")
 	List<FualStationDetails> search(@Param("stationName") String stationName);
 }
