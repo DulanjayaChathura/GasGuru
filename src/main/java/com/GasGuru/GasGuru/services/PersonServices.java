@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -34,6 +35,9 @@ public class PersonServices {
 
 	@Autowired
 	private ValidatePersonDetails validator;
+	
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
 
 	private String email;
 	private String phoneNo;
@@ -144,7 +148,7 @@ public class PersonServices {
 				newPerson.setModleOfVehicle(person.getModleOfVehicle());
 			}
 			if (!StringUtils.isEmpty(password)) {
-				newPerson.setPassword(password);
+				newPerson.setPassword(bcryptEncoder.encode(password));
 			} else {
 				newPerson.setPassword(person.getPassword());
 			}
@@ -206,7 +210,7 @@ public class PersonServices {
 			newPerson.setFullName(register.getFullName());
 			newPerson.setModleOfVehicle(register.getModleOfVehicle());
 			newPerson.setNic(register.getNic());
-			newPerson.setPassword(register.getPassword());
+			newPerson.setPassword(bcryptEncoder.encode(register.getPassword()));
 			newPerson.setPhoto(register.getPhoto());
 			newPerson.setPhotoOfVehicle(register.getPhotoOfVehicle());
 			newPerson.setTelNo(register.getTelNo());

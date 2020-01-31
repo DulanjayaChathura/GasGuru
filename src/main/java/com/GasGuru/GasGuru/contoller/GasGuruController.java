@@ -2,19 +2,28 @@ package com.GasGuru.GasGuru.contoller;
 
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.GasGuru.GasGuru.entity.Person;
+import com.GasGuru.GasGuru.jwtConfig.JwtTokenUtil;
 import com.GasGuru.GasGuru.model.EditDetails;
 import com.GasGuru.GasGuru.model.FeedbackModel;
 import com.GasGuru.GasGuru.model.FualStationDetailsModel;
@@ -23,12 +32,14 @@ import com.GasGuru.GasGuru.model.RegisterDetails;
 import com.GasGuru.GasGuru.services.PersonServices;
 import com.GasGuru.GasGuru.services.FeedbackServices;
 import com.GasGuru.GasGuru.services.FualStationServices;
+import com.GasGuru.GasGuru.services.JwtUserDetailsService;
 import com.GasGuru.GasGuru.util.JacksonConfig;
 
 
 
 @RestController
 @RequestMapping(path = "/gasGuru")
+@CrossOrigin
 public class GasGuruController {
 	
 	@Autowired
@@ -37,6 +48,11 @@ public class GasGuruController {
 	private FualStationServices fualStationServices;
 	@Autowired
 	private FeedbackServices feedbackServices;
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+	@Autowired
+	private JwtUserDetailsService userDetailsService;
 	
 	
 	@Autowired
@@ -67,7 +83,7 @@ public class GasGuruController {
 		ThreadContext.put("id", UUID.randomUUID().toString());
 		ThreadContext.put(API_NAME, "/gasGuru/login");
 		logger.info("login {}" , jacksonConfig.convertToJson(model));
-		return personServices.login(model);
+		return userDetailsService.authenticate(model);
 
 		
 	}
@@ -131,6 +147,11 @@ public class GasGuruController {
 		logger.info("searchFualStation {}", stationName);
 		return fualStationServices.searchFualStation(stationName);
 	}
+	
+
+
+
+
 	
 
 }
