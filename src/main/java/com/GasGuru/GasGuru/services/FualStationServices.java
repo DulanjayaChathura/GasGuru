@@ -30,7 +30,8 @@ public class FualStationServices {
 			int vehicleCount = fualStation.getVehicleCount();
 			details.setStationName(fualStation.getStationName());
 			details.setVehicleCount(vehicleCount);
-
+			details.setLatitude(fualStation.getLatitude());
+			details.setLongitude(fualStation.getLongitude());
 			if (vehicleCount < 0) {
 				throw new BadRequestException("vehicle count is invalid");
 			} else if (vehicleCount <= 4) {
@@ -65,6 +66,8 @@ public class FualStationServices {
 			int vehicleCount = fualStation.getVehicleCount();
 			details.setStationName(fualStation.getStationName());
 			details.setVehicleCount(vehicleCount);
+			details.setLatitude(fualStation.getLatitude());
+			details.setLongitude(fualStation.getLongitude());
 
 			if (vehicleCount < 0) {
 				throw new BadRequestException("vehicle count is invalid");

@@ -75,8 +75,6 @@ public class GasGuruController {
 		return personServices.register(model);
 		
 	}
-	
-	
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody Login model){
 		
@@ -84,7 +82,6 @@ public class GasGuruController {
 		ThreadContext.put(API_NAME, "/gasGuru/login");
 		logger.info("login {}" , jacksonConfig.convertToJson(model));
 		return userDetailsService.authenticate(model);
-
 		
 	}
 	@PostMapping("/addFeedback")

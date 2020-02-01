@@ -11,6 +11,8 @@ import lombok.Setter;
 public class FualStationDetailsModel {
 	
 	private String stationName;
+	private double latitude;
+	private double longitude;
 	private int vehicleCount;
 
 }

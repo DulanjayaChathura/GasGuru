@@ -22,11 +22,13 @@ public class FualStationDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="stationId")
 	private int stationId;
+	@Column(name ="latitude")
+	private double latitude;
+	@Column(name ="longitude")
+	private double longitude;
 	@Column(name="stationName")
-	@NotNull
 	private String stationName;
 	@Column(name ="vehicleCount")
-	@NotNull
 	private int vehicleCount;
 	@Column(name="colourIndicator")
 	private String colourIndicator;
