@@ -19,8 +19,8 @@ import lombok.Setter;
 public class FualStationDetails {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="stationId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="stationId", nullable = false)
 	private int stationId;
 	@Column(name ="latitude")
 	private double latitude;

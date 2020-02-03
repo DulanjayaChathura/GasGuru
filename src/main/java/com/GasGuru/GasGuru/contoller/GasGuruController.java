@@ -39,7 +39,7 @@ import com.GasGuru.GasGuru.util.JacksonConfig;
 
 @RestController
 @RequestMapping(path = "/gasGuru")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class GasGuruController {
 	
 	@Autowired
@@ -144,7 +144,13 @@ public class GasGuruController {
 		logger.info("searchFualStation {}", stationName);
 		return fualStationServices.searchFualStation(stationName);
 	}
-	
+	@GetMapping("/allFualStation")
+	public ResponseEntity getAllFualStation() {
+		ThreadContext.put("id", UUID.randomUUID().toString());
+		ThreadContext.put(API_NAME, "/gasGuru/allFualStation");
+		logger.info("/gasGuru/allFualStation {}");
+		return fualStationServices.getAllFualStation();
+	}
 
 
 

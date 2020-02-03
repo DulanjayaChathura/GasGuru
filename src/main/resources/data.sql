@@ -1,0 +1,6 @@
+INSERT INTO `fual_station_details` (colour_indicator, station_name, vehicle_count, latitude, longitude) VALUES ( 'Law', 'IOC Filling Station- Badulla', 1, 6.989500, 81.055702);
+INSERT INTO `fual_station_details` (colour_indicator, station_name, vehicle_count, latitude, longitude) VALUES ( 'Law', 'Ceypetco Filling Station', 4, 6.982522, 81.058807);
+INSERT INTO `fual_station_details` (colour_indicator, station_name, vehicle_count, latitude, longitude) VALUES ( 'Medium', 'Ceypetco filling station,Badulla', 5, 6.998645, 81.057198);
+INSERT INTO `fual_station_details` (colour_indicator, station_name, vehicle_count, latitude, longitude) VALUES ( 'High', 'IOC filling station,Passara', 8, 6.934718, 81.155411);
+INSERT INTO `fual_station_details` (colour_indicator, station_name, vehicle_count, latitude, longitude) VALUES ( 'High', 'Co-Op Fuel Station', 9, 6.986600, 81.057503);
+INSERT INTO `fual_station_details` (colour_indicator, station_name, vehicle_count, latitude, longitude) VALUES ( 'High', 'IOC Filling Station - Haliela', 10, 6.989500, 81.035500);

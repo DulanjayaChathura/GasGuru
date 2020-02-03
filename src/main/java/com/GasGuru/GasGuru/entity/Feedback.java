@@ -17,8 +17,8 @@ import lombok.Setter;
 @Getter @Setter
 public class Feedback {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id",nullable = false)
 	int id;
 	
 	@ManyToOne

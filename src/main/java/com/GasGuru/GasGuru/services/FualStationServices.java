@@ -112,5 +112,14 @@ public class FualStationServices {
 			return new ResponseEntity(new CommonResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	public ResponseEntity getAllFualStation() {
+		try {
+		return new ResponseEntity(repo.findAll(), HttpStatus.OK);
+		}catch (Exception e) {
+			logger.error("internal server error :: {}", e);
+			return new ResponseEntity(new CommonResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 }
