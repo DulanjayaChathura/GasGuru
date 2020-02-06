@@ -1,6 +1,8 @@
 package com.GasGuru.GasGuru.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ import com.GasGuru.GasGuru.Exception.BadRequestException;
 import com.GasGuru.GasGuru.entity.Person;
 import com.GasGuru.GasGuru.model.CommonResponse;
 import com.GasGuru.GasGuru.model.EditDetails;
+import com.GasGuru.GasGuru.model.GetUsernameResponse;
 import com.GasGuru.GasGuru.model.Login;
 import com.GasGuru.GasGuru.model.RegisterDetails;
 import com.GasGuru.GasGuru.repo.PersonRepo;
@@ -246,10 +249,15 @@ public class PersonServices {
 		}
 	}
 	
-	public ResponseEntity getAllUserDetails() {
+	public ResponseEntity getUsername() {
 		try {
-			
-			return new ResponseEntity(repo.findAll(), HttpStatus.OK);
+			List<Person> personList = repo.findAll();
+			List<GetUsernameResponse> responseList= new ArrayList<GetUsernameResponse>();
+			for (Person person : personList) {
+				responseList.add(new GetUsernameResponse(person.getUsername(),person.getFullName()));
+				
+			}
+			return new ResponseEntity(responseList , HttpStatus.OK);
 
 		} catch (BadRequestException e) {
 			logger.error("error occured {} {} ", e.getMessage(), e);

@@ -130,12 +130,12 @@ public class GasGuruController {
 		return personServices.getDetails(username);
 		
 	}
-	@GetMapping("/getAllUserDetails")
+	@GetMapping("/getUsername")
 	public ResponseEntity getAllUserDetails() {
 		ThreadContext.put("id", UUID.randomUUID().toString());
-		ThreadContext.put(API_NAME, "/getAllUserDetails");
-		logger.info("getAllUserDetails");
-		return personServices.getAllUserDetails();
+		ThreadContext.put(API_NAME, "/getUsername");
+		logger.info("getUsername");
+		return personServices.getUsername();
 		
 	}
 	@PostMapping("/addFualStation")
