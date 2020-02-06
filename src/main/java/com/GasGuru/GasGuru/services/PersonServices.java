@@ -141,9 +141,9 @@ public class PersonServices {
 				newPerson.setColorOfVehicle(person.getColorOfVehicle());
 			}
 			if (!StringUtils.isEmpty(fullName)) {
-				newPerson.setFullName(fullName);
+				newPerson.setFullname(fullName);
 			} else {
-				newPerson.setFullName(person.getFullName());
+				newPerson.setFullname(person.getFullname());
 			}
 			if (!StringUtils.isEmpty(modelOfVehicle)) {
 				newPerson.setModleOfVehicle(modelOfVehicle);
@@ -210,7 +210,7 @@ public class PersonServices {
 			newPerson.setColorOfVehicle(register.getColorOfVehicle());
 			newPerson.setDateOfBirth(dateOfBirth);
 			newPerson.setEmail(register.getEmail());
-			newPerson.setFullName(register.getFullName());
+			newPerson.setFullname(register.getFullname());
 			newPerson.setModleOfVehicle(register.getModleOfVehicle());
 			newPerson.setNic(register.getNic());
 			newPerson.setPassword(bcryptEncoder.encode(register.getPassword()));
@@ -254,7 +254,7 @@ public class PersonServices {
 			List<Person> personList = repo.findAll();
 			List<GetUsernameResponse> responseList= new ArrayList<GetUsernameResponse>();
 			for (Person person : personList) {
-				responseList.add(new GetUsernameResponse(person.getUsername(),person.getFullName()));
+				responseList.add(new GetUsernameResponse(person.getUsername(),person.getFullname()));
 				
 			}
 			return new ResponseEntity(responseList , HttpStatus.OK);

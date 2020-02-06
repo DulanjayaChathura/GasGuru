@@ -14,7 +14,7 @@ public class RegisterDetails {
 	
 
 	private String username;
-	private String fullName;
+	private String fullname;
 	private String dateOfBirth;
 	private String nic;
 	private String address;
