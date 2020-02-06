@@ -46,8 +46,8 @@ public class Person{
 	String modleOfVehicle;
 	@Column(name="colorOfVehicle")
 	String colorOfVehicle;
-	@Column(name ="adminFlag")
-	boolean adminFlag;
+	@Column(name ="userType")
+	String userType;
 	
 	
 	

@@ -26,6 +26,6 @@ public class RegisterDetails {
 	private String typeOfVehicle;
 	private String modleOfVehicle;
 	private String colorOfVehicle;
-	private boolean adminFlag;
+	private String userType;
 
 }

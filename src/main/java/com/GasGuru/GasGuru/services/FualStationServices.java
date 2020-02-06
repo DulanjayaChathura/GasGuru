@@ -96,9 +96,9 @@ public class FualStationServices {
 
 	}
 
-	public ResponseEntity searchFualStation(String stationName) {
+	public ResponseEntity searchFualStation(int stationId) {
 		try {
-			return new ResponseEntity(repo.search(stationName), HttpStatus.OK);
+			return new ResponseEntity(repo.findById(stationId), HttpStatus.OK);
 
 		} catch (BadRequestException e) {
 			logger.error("error occured {} {} ", e.getMessage(), e);

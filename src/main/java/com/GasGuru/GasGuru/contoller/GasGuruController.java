@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,7 +40,7 @@ import com.GasGuru.GasGuru.util.JacksonConfig;
 
 @RestController
 @RequestMapping(path = "/gasGuru")
-@CrossOrigin(origins = "*" , allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200" )
 public class GasGuruController {
 	
 	@Autowired
@@ -121,6 +122,14 @@ public class GasGuruController {
 		return personServices.editDetails(username, model);
 		
 	}
+	@PostMapping("/getDetailsByUsername")
+	public ResponseEntity getDetails(@RequestParam String username) {
+		ThreadContext.put("id", UUID.randomUUID().toString());
+		ThreadContext.put(API_NAME, "/getDetailsByUsername");
+		logger.info("getDetails {}",  username);
+		return personServices.getDetails(username);
+		
+	}
 	@PostMapping("/addFualStation")
 	public ResponseEntity addFualStation(@RequestBody FualStationDetailsModel model) {
 		ThreadContext.put("id", UUID.randomUUID().toString());
@@ -137,12 +146,12 @@ public class GasGuruController {
 		return fualStationServices.editFualStation(stationId, model);
 		
 	}
-	@GetMapping("/searchFualStation/{stationName}")
-	public ResponseEntity serachFualStation(@PathVariable(name ="stationName", required = true)  String stationName) {
+	@GetMapping("/searchFualStation/{stationId}")
+	public ResponseEntity serachFualStation(@PathVariable(name ="stationId", required = true)  int  stationId) {
 		ThreadContext.put("id", UUID.randomUUID().toString());
 		ThreadContext.put(API_NAME, "/gasGuru/searchFualStation");
-		logger.info("searchFualStation {}", stationName);
-		return fualStationServices.searchFualStation(stationName);
+		logger.info("searchFualStation {}", stationId);
+		return fualStationServices.searchFualStation(stationId);
 	}
 	@GetMapping("/allFualStation")
 	public ResponseEntity getAllFualStation() {

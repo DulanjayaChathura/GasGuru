@@ -125,7 +125,7 @@ public class PersonServices {
 			}
 
 			newPerson.setUsername(username);
-			newPerson.setAdminFlag(person.isAdminFlag());
+			newPerson.setUserType(person.getUserType());
 
 			if (!StringUtils.isEmpty(address)) {
 				newPerson.setAddress(address);
@@ -203,7 +203,7 @@ public class PersonServices {
 			Person newPerson = new Person();
 			newPerson.setUsername(register.getUsername());
 			newPerson.setAddress(register.getAddress());
-			newPerson.setAdminFlag(register.isAdminFlag());
+			newPerson.setUserType(register.getUserType());
 			newPerson.setColorOfVehicle(register.getColorOfVehicle());
 			newPerson.setDateOfBirth(dateOfBirth);
 			newPerson.setEmail(register.getEmail());
@@ -219,6 +219,22 @@ public class PersonServices {
 			repo.save(newPerson);
 
 			return new ResponseEntity(new CommonResponse("Registration is successful"), HttpStatus.OK);
+
+		} catch (BadRequestException e) {
+			logger.error("error occured {} {} ", e.getMessage(), e);
+			return new ResponseEntity(new CommonResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+
+		} catch (Exception e) {
+			logger.error("internal server error :: {}", e);
+			return new ResponseEntity(new CommonResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	public ResponseEntity getDetails(String username) {
+		try {
+			logger.info("username {} ", username );
+			Person user= repo.findById(username).get();
+			return new ResponseEntity(user, HttpStatus.OK);
 
 		} catch (BadRequestException e) {
 			logger.error("error occured {} {} ", e.getMessage(), e);
