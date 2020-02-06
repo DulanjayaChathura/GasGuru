@@ -245,5 +245,21 @@ public class PersonServices {
 			return new ResponseEntity(new CommonResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	public ResponseEntity getAllUserDetails() {
+		try {
+			
+			return new ResponseEntity(repo.findAll(), HttpStatus.OK);
+
+		} catch (BadRequestException e) {
+			logger.error("error occured {} {} ", e.getMessage(), e);
+			return new ResponseEntity(new CommonResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+
+		} catch (Exception e) {
+			logger.error("internal server error :: {}", e);
+			return new ResponseEntity(new CommonResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
 
 }
