@@ -21,7 +21,7 @@ public class Person{
 	@Column(name="username", unique = true, nullable = false)
 	String username;
 	@Column(name="fullname")
-	String fullName;
+	String fullname;
 	@Column(name="dateOfBirth")
 	Date dateOfBirth;
 	@Column(name="nic")
