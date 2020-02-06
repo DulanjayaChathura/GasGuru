@@ -39,7 +39,7 @@ import com.GasGuru.GasGuru.util.JacksonConfig;
 
 @RestController
 @RequestMapping(path = "/gasGuru")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class GasGuruController {
 	
 	@Autowired
