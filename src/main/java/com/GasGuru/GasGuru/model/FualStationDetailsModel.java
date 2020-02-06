@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter @Getter
 public class FualStationDetailsModel {
 	
+	private int stationId;
 	private String stationName;
 	private double latitude;
 	private double longitude;

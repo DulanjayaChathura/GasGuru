@@ -145,13 +145,12 @@ public class GasGuruController {
 		logger.info("addFualStation {}", jacksonConfig.convertToJson(model));
 		return fualStationServices.addFualStation(model);
 	}
-	@PutMapping("/editFualStation/{stationId}")
-	public ResponseEntity editFualStation(@RequestBody FualStationDetailsModel model,
-			@PathVariable(name ="stationId", required = true)  int stationId) {
+	@PutMapping("/editFualStation")
+	public ResponseEntity editFualStation(@RequestBody FualStationDetailsModel model) {
 		ThreadContext.put("id", UUID.randomUUID().toString());
 		ThreadContext.put(API_NAME, "/gasGuru/editFualStation");
-		logger.info("editFualStation {} {}", jacksonConfig.convertToJson(model), stationId);
-		return fualStationServices.editFualStation(stationId, model);
+		logger.info("editFualStation {} {}", jacksonConfig.convertToJson(model));
+		return fualStationServices.editFualStation( model);
 		
 	}
 	@GetMapping("/searchFualStation/{stationId}")

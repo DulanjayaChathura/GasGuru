@@ -55,8 +55,13 @@ public class FualStationServices {
 
 	}
 
-	public ResponseEntity editFualStation(int stationId, FualStationDetailsModel fualStation) {
+	public ResponseEntity editFualStation( FualStationDetailsModel fualStation) {
 		try {
+			int stationId= fualStation.getStationId();
+			if(StringUtils.isEmpty(stationId)) {
+				throw new BadRequestException("stationId cannot be null");
+			}
+			
 			FualStationDetails oldDetails = repo.findById(stationId).get();
 			if (StringUtils.isEmpty(oldDetails)) {
 				throw new BadRequestException("fual station dosen't exist");
@@ -64,10 +69,10 @@ public class FualStationServices {
 			FualStationDetails details = new FualStationDetails();
 			details.setStationId(oldDetails.getStationId());
 			int vehicleCount = fualStation.getVehicleCount();
-			details.setStationName(fualStation.getStationName());
+			details.setStationName(oldDetails.getStationName());
 			details.setVehicleCount(vehicleCount);
-			details.setLatitude(fualStation.getLatitude());
-			details.setLongitude(fualStation.getLongitude());
+			details.setLatitude(oldDetails.getLatitude());
+			details.setLongitude(oldDetails.getLongitude());
 
 			if (vehicleCount < 0) {
 				throw new BadRequestException("vehicle count is invalid");
