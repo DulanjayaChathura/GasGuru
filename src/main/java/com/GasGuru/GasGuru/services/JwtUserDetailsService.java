@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -43,6 +44,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	private UserDetails userDetails;
 	private String token;
+	private String userType;
 	private static final Logger logger = LogManager.getLogger(JwtUserDetailsService.class);
 
 	public ResponseEntity authenticate(Login login) {
@@ -51,8 +53,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 			authenticate(login.getUsername(), login.getPassword());
 
 			userDetails = loadUserByUsername(login.getUsername());
+			
+			userType =getUserType(login.getUsername());
 
-			token = jwtTokenUtil.generateToken(userDetails);
+			token = jwtTokenUtil.generateToken(userDetails, userType );
 
 			return ResponseEntity.ok(new JwtResponse(token));
 
@@ -78,9 +82,16 @@ public class JwtUserDetailsService implements UserDetailsService {
 	
 		}
 		Person user=repo.findById(username).get();
+	
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				new ArrayList<>());
 
+	}
+	public  String getUserType(String username) {
+		Person user=repo.findById(username).get();
+		
+		return user.getUserType();
+		
 	}
 
 	private void authenticate(String username, String password) throws Exception {
